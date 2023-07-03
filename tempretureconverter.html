@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Temperature Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: navajowhite;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 13px;
+            padding: 55px;
+            box-shadow: 11px 14px 12px 5px rgb(0 0 0 / 21%);
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #777;
+            font-weight: bold;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #ff6f00;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #ff8124;
+        }
+
+        .result {
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+            color: #333;
+            font-size: 18px;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Temperature Converter</h1>
+    <div class="container">
+        <div class="input-group">
+            <label for="celsius">Celsius</label>
+            <input type="number" id="celsius" placeholder="Enter temperature in Celsius" />
+        </div>
+        <div class="input-group">
+            <label for="fahrenheit">Fahrenheit</label>
+            <input type="number" id="fahrenheit" placeholder="Enter temperature in Fahrenheit" />
+        </div>
+        <button class="btn" onclick="convert()">Convert</button>
+        <div class="result" id="result"></div>
+        <div class="error" id="error"></div>
+    </div>
+
+    <script>
+        function convert() {
+            var celsiusInput = document.getElementById('celsius');
+            var fahrenheitInput = document.getElementById('fahrenheit');
+            var resultDiv = document.getElementById('result');
+            var errorDiv = document.getElementById('error');
+
+            errorDiv.innerHTML = "";
+
+            if (celsiusInput.value !== '' && fahrenheitInput.value !== '') {
+                errorDiv.innerHTML = "Please enter only one temperature value.";
+                resultDiv.innerHTML = "";
+                return;
+            }
+
+            if (celsiusInput.value !== '') {
+                var celsius = parseFloat(celsiusInput.value);
+                var fahrenheit = (celsius * 9 / 5) + 32;
+                resultDiv.innerHTML = celsius + "°C = " + fahrenheit.toFixed(2) + "°F";
+            } else if (fahrenheitInput.value !== '') {
+                var fahrenheit = parseFloat(fahrenheitInput.value);
+                var celsius = (fahrenheit - 32) * 5 / 9;
+                resultDiv.innerHTML = fahrenheit + "°F = " + celsius.toFixed(2) + "°C";
+            } else {
+                errorDiv.innerHTML = "Please enter a temperature value.";
+                resultDiv.innerHTML = "";
+            }
+        }
+    </script>
+</body>
+
+</html>
